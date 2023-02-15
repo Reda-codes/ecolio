@@ -9,9 +9,6 @@ from bson.json_util import dumps
 from common.utils import safe_get_env_var
 
 from api.v1.views import bp
-from api.v1.messages_service import (
-    get_users
-)
 
 from api.security.guards import (
     authorization_guard,
