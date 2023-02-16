@@ -60,11 +60,6 @@ jobs:
           app-name: 'ecolio-api'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6966D351F3A945AAB18728F307795D84 }}
-          
-      - name: Configure Gunicorn
-        run: echo "gunicorn --bind=0.0.0.0 --workers=4 --timeout=600 wsgi:app" > startup.sh
-        shell: bash
-        
-      - name: Start Gunicorn
-        run: sh startup.sh
-        shell: bash
+          startup-command: |
+            source /home/site/wwwroot/venv/bin/activate
+            /home/site/wwwroot/venv/bin/gunicorn --bind 0.0.0.0:443 'api:create_app()'
