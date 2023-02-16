@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'api-ecolio'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_18B87D6648D049E3B1892E08D107D3F2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9FDCC25A6794404CA9F68D7E7FF65590 }}
