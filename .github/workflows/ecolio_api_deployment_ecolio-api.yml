@@ -22,10 +22,6 @@ jobs:
         with:
           python-version: '3.8'
 
-      - name: Install Gunicorn
-        run: |
-          python -m pip install gunicorn==20.1.0
-
       - name: Create and start virtual environment
         run: |
           python -m venv venv
@@ -68,6 +64,10 @@ jobs:
       - name: Configure Gunicorn
         run: echo "gunicorn --bind=0.0.0.0 --workers=4 --timeout=600 wsgi:app" > startup.sh
         shell: bash
+
+      - name: Install Gunicorn
+        run: |
+          python -m pip install gunicorn==20.1.0
         
       - name: Start Gunicorn
         run: sh startup.sh
