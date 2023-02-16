@@ -39,7 +39,6 @@ jobs:
           path: |
             . 
             !venv/
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -61,3 +60,11 @@ jobs:
           app-name: 'ecolio-api'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6966D351F3A945AAB18728F307795D84 }}
+          
+      - name: Configure Gunicorn
+        run: echo "gunicorn --bind=0.0.0.0 --workers=4 --timeout=600 wsgi:app" > startup.sh
+        shell: bash
+        
+      - name: Start Gunicorn
+        run: sh startup.sh
+        shell: bash
