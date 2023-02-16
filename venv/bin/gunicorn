@@ -1,4 +1,4 @@
-#!/home/reda/ecolio/backend/venv/bin/python3
+#!/home/reda/ecolio/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
