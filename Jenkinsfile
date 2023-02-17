@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t redacodes/ecolio-api ."
-
+                timeout(time: 30, unit: 'MINUTES') {
+                    sh "pip install -r requirements.txt"
+                }
             }
         }
 
