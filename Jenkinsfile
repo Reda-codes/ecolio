@@ -3,9 +3,8 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USERNAME')]) {
-                    sh "docker build -t $USERNAME/ecolio-api ."
-                }
+                sh "docker build -t redacodes/ecolio-api ."
+
             }
         }
 
