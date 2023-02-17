@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker build -t $DOCKER_USERNAME/ecolio-api ."
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USERNAME')]) {
+                    sh "docker build -t $USERNAME/ecolio-api ."
                 }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                    sh "docker push $DOCKER_USERNAME/ecolio-api"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh "docker login -u $USERNAME -p $PASSWORD"
+                    sh "docker push $USERNAME/ecolio-api"
                 }
             }
         }
