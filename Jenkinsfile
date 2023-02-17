@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh "sudo su"
+                sh "sudo -S su"
                 sh "docker build -t redacodes/ecolio-api ."
 
             }
