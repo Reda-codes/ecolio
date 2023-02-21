@@ -19,7 +19,7 @@ invalid_request_error = {
 
 admin_messages_permissions = SimpleNamespace(
     read="read:admin-messages",
-    delete="delete:student"
+    delete="delete:student",
 )
 
 
