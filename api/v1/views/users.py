@@ -26,7 +26,7 @@ def getUsers():
     user_type = request.form.get("user_type")
     Database.initialize()
     users = Database.findAll(user_type)
-    users = [{"id": str(user["_id"])}
+    users = [{"id": str(user["id"])}
              for user in users]
     return jsonify({"users": users})
 
@@ -36,7 +36,7 @@ def getUsers():
 def getUser(user_id):
     user_type = request.form.get("user_type")
     Database.initialize()
-    user = Database.find(user_type, {"auth0_id": user_id})
+    user = Database.find(user_type, {"id": user_id})
     return dumps(list(user))
 
 
