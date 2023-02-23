@@ -56,8 +56,8 @@ def postClass():
         'description': request.form.get("description"),
         'instructor': request.form.get("instructor"),
         'room_number': request.form.get("room_number"),
-        'students': request.form.get("students"),
-        'homework': request.form.get("homework")
+        'students': request.form.getlist("students"),
+        'homework': request.form.getlist("homework")
     }
     Database.initialize()
     classs = Database.insert("classes", obj)
