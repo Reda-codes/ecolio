@@ -1,5 +1,6 @@
 from flask import request
 from flask import jsonify
+import json
 import uuid
 
 from models.db import Database
@@ -56,8 +57,8 @@ def postClass():
         'description': request.form.get("description"),
         'instructor': request.form.get("instructor"),
         'room_number': request.form.get("room_number"),
-        'students': request.form.getlist("students"),
-        'homework': request.form.getlist("homework")
+        'students': json.loads(request.form.get("students")),
+        'homework': json.loads(request.form.get("homework"))
     }
     Database.initialize()
     classs = Database.insert("classes", obj)
