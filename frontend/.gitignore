@@ -1,3 +1,4 @@
+frontend/
 ### Flask ###	
 instance/*	
 !instance/.gitignore	

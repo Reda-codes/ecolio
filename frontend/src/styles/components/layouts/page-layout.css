@@ -1,0 +1,15 @@
+.page-layout__content {
+  flex: 1;
+  flex-basis: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 2rem;
+  max-width: 120rem;
+  width: 100%;
+}
+
+.page-layout {
+  padding-left: 16.666667%;
+}
