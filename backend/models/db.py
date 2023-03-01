@@ -34,3 +34,7 @@ class Database():
     def update(collection, id, data):
         return Database.DATABASE[collection].update_one({"id": id}, data)
 
+    @staticmethod
+    def updateMany(collection, data):
+        return Database.DATABASE[collection].update_many({}, data)
+

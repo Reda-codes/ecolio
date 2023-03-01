@@ -91,9 +91,9 @@ celerybeat.pid
 # SageMath parsed files	
 *.sage.py	
 # Environments	
-.venv	
+.venv
+venv	
 env/	
-venv/	
 ENV/	
 env.bak/	
 venv.bak/	
@@ -200,3 +200,5 @@ $RECYCLE.BIN/
 .env.development.local
 .env.test.local
 .env.production.local
+.venv
+.venv/

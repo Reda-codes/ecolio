@@ -23,10 +23,10 @@ auth0_domain = safe_get_env_var("AUTH0_DOMAIN")
 @bp.route("/users", methods=['GET'], strict_slashes=False)
 @authorization_guard
 def getUsers():
-    user_type = request.form.get("user_type")
+    user_type = request.headers['user_type']
     Database.initialize()
     users = Database.findAll(user_type)
-    users = [{"id": str(user["_id"])}
+    users = [{"id": str(user["id"]), "first_name": str(user["first_name"]), "last_name": str(user["last_name"]), "email": str(user["email"])}
              for user in users]
     return jsonify({"users": users})
 
@@ -34,9 +34,9 @@ def getUsers():
 @bp.route("/users/<user_id>", methods=['GET'], strict_slashes=False)
 @authorization_guard
 def getUser(user_id):
-    user_type = request.form.get("user_type")
+    user_type = request.headers['user_type']
     Database.initialize()
-    user = Database.find(user_type, {"auth0_id": user_id})
+    user = Database.find(user_type, {"id": user_id})
     return dumps(list(user))
 
 
@@ -71,16 +71,17 @@ def postUser():
     return response.json()
 
 
-@bp.route("/users/<user_id>", methods=['DELETE'], strict_slashes=False)
+@bp.route("/users/student/<user_id>", methods=['DELETE'], strict_slashes=False)
 @authorization_guard
 @permissions_guard([admin_messages_permissions.read])
 def deleteUser(user_id):
     data = {
         "authorization": auth0_api_token,
     }
-    user_type = request.form.get("user_type")
+    user_type = request.headers['user_type']
     url = "https://" + auth0_domain + "/api/v2/users/" + user_id
     apiResponse = requests.delete(url, headers=data)
     Database.initialize()
-    dbResponse = Database.delete(user_type, user_id)
+    dbUserDelete = Database.delete(user_type, user_id)
+    dbUserClean = Database.updateMany('classes', {"$pull": { "students": user_id }})
     return jsonify({"Api Status Code": apiResponse.status_code})
