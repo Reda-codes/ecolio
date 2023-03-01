@@ -6,42 +6,38 @@ export function NotesForm() {
   const { user, getAccessTokenSilently } = useAuth0();
   const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
-  const [classes, setClasses] = useState([]);
-  const [classInfo, setClassInfo] = useState({
-    id: "",
-    homework: [],
+  const [noteInfo, setNoteInfo] = useState({
+    instructor_name: `${user.given_name} ${user.family_name}`,
+    student_id: "",
+    description: "",
   });
 
-  function getNamesById(ids, users) {
-    const names = [];
-    const idsArray = ids;
-    for (let i = 0; i < idsArray.length; i++) {
-      const id = idsArray[i];
-      const user = users.find((user) => user.id === id);
-      if (user) {
-        names.push({ id: id, name: `${user.first_name} ${user.last_name}` });
+  function getNameById(id, users) {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].id === id) {
+        return users[i].first_name + " " + users[i].last_name;
       }
     }
-    return names;
+    return "Select a Student";
   }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setClassInfo((prevClassInfo) => ({
+    setNoteInfo((prevClassInfo) => ({
       ...prevClassInfo,
       [name]: value,
     }));
   };
 
-  const handleClassChange = (event) => {
+  const handleNoteChange = (event) => {
     const { value, checked } = event.target;
-    setClassInfo((prevClassInfo) => ({
-      ...prevClassInfo,
-      id: checked ? value : "",
+    setNoteInfo((prevNoteInfo) => ({
+      ...prevNoteInfo,
+      student_id: checked ? value : "",
     }));
   };
 
-  function removeFromClass(arr, id, hw) {
+  /* function removeFromClass(arr, id, hw) {
     const result = arr.map((elem) => {
       if (elem.id === id) {
         let index = elem.homework.indexOf(hw);
@@ -62,15 +58,22 @@ export function NotesForm() {
       return elem;
     });
     return result;
-  }
+  } */
 
-  function addHomework(class_id) {
-    if (window.confirm("Are you sure you want to add this user?")) {
+  function addNote(e) {
+    e.preventDefault();
+    if (noteInfo.student_id === "") {
+      alert("Please Select a Student");
+    } else {
       const token = "Bearer " + message.replace(/['"]+/g, "");
       axios
         .post(
-          "https://api.ecolio.live/api/v1/classes/homework/" + class_id,
-          { homework: classInfo.homework },
+          " http://127.0.0.1:8000/api/v1/notes",
+          {
+            instructor_name: noteInfo.instructor_name,
+            student_id: noteInfo.student_id,
+            description: noteInfo.description,
+          },
           {
             headers: {
               Authorization: token,
@@ -81,7 +84,7 @@ export function NotesForm() {
         .then((response) => {
           if (response) {
             console.log(response.data);
-            setClasses(addToHomework(classes, class_id, classInfo.homework));
+            /* setClasses(addToHomework(classes, class_id, classInfo.homework)); */
           }
           // handle success
         })
@@ -92,19 +95,18 @@ export function NotesForm() {
     }
   }
 
-  function removeHomrwork(class_id, homework) {
+  /* function removeNote(id) {
     if (
       window.confirm("Are you sure you want to permanently delete this user?")
     ) {
       const token = "Bearer " + message.replace(/['"]+/g, "");
       axios
         .put(
-          "https://api.ecolio.live/api/v1/classes/homework/" + class_id,
-          { homework: homework },
+          "https://api.ecolio.live/api/v1/notes" + id,
+          { request: "Delete" },
           {
             headers: {
               Authorization: token,
-              "Content-Type": "multipart/form-data",
             },
           }
         )
@@ -120,14 +122,13 @@ export function NotesForm() {
           // handle error
         });
     }
-  }
+  } */
 
   useEffect(() => {
     let isMounted = true;
 
     const getMessage = async () => {
       const accessToken = await getAccessTokenSilently();
-      const id = user.sub;
 
       if (!isMounted) {
         return;
@@ -156,7 +157,7 @@ export function NotesForm() {
           alert("There is a problem");
         }
 
-        try {
+        /* try {
           const response = await axios.get(
             "https://api.ecolio.live/api/v1/classes/instructor/" + id,
             {
@@ -170,7 +171,7 @@ export function NotesForm() {
         } catch (error) {
           console.log(error.response.data);
           alert("There is a problem fetching instructors");
-        }
+        } */
       }
     };
 
@@ -184,23 +185,25 @@ export function NotesForm() {
     <>
       <div className="mb-8 overflow-visible z-20">
         <div className="text-black p-8 userspage rounded-2xl drop-shadow-xl flex">
-          <div className="w-1/2 ">
-            <div className="p-2 flex justify-around mb-8">
-              <div className="dropdown p-2 bg-white rounded-lg w-1/4 text-center hover:bg-orange-400">
+          <form className="w-1/2 " onSubmit={addNote}>
+            <div className="p-2 mb-8 flex flex-col">
+              <div className="dropdown p-2 bg-white w-1/2 mx-auto rounded-lg text-center hover:bg-orange-400">
                 <label>
-                  <span className="text-2xl font-bold">{classInfo.id}</span>
+                  <span className="text-2xl font-bold">
+                    {getNameById(noteInfo.student_id, users)}
+                  </span>
                   <ul className="dropdown-content text-left rounded-xl">
                     {users.map((u) => (
                       <li key={u.id} className="p-2 ">
                         <label>
                           <input
                             type="radio"
-                            name="classes"
+                            name="id"
                             value={u.id}
-                            onChange={handleClassChange}
-                            checked={classInfo.id.includes(u.id)}
+                            onChange={handleNoteChange}
+                            checked={noteInfo.student_id.includes(u.id)}
                           />
-                          {`${u.id}`}
+                          {getNameById(u.id, users)}
                         </label>
                       </li>
                     ))}
@@ -208,11 +211,11 @@ export function NotesForm() {
                 </label>
               </div>
               <div className="p-2">
-                <label className="block text-2xl font-bold">Homework:</label>
+                <label className="block text-2xl font-bold">Note:</label>
                 <input
                   type="text"
-                  name="homework"
-                  value={classInfo.homework}
+                  name="description"
+                  value={noteInfo.description}
                   onChange={handleChange}
                   required
                   className="w-full h-10 p-2 rounded-lg border-2"
@@ -220,17 +223,15 @@ export function NotesForm() {
               </div>
             </div>
             <button
+              type="submit"
               className="block p-2 mx-auto w-1/2 text-3xl  text-white font-bold bg-red-500 rounded-xl"
-              onClick={() => {
-                addHomework(classInfo.id);
-              }}
             >
               Add Homework
             </button>
-          </div>
+          </form>
         </div>
       </div>
-      <div className="relative w-full overflow-visible z-10 shadow-x">
+      {/* <div className="relative w-full overflow-visible z-10 shadow-x">
         <h1 className="text-2xl font-bold p-5 pl-0 ">Classes List</h1>
         <table className="w-full text-sm text-left text-black ">
           <thead className="text-xl text-gray-50 uppercase bg-gray-700 ">
@@ -309,7 +310,7 @@ export function NotesForm() {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </>
   );
 }
