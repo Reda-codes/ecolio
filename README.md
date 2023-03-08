@@ -24,6 +24,7 @@ Ecolio is an essential tool for schools of all sizes and is sure to make a signi
 
 # The Story
 <br>
+
 The idea came up to me when I was randomly searching for different CMSs and found out that for schools there isn't that much solutions addressed to this issue so for my [Holberton School](https://www.holbertonschool.com) and [ALX](https://www.alxafrica.com) Portfolio Project I decided to create Ecolio A platform for every school.
 <br>
 <br>
