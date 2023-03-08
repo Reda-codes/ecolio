@@ -10,7 +10,12 @@ Ecolio is an innovative school CMS MVP designed to help schools manage their stu
 Developed with a great passion, Ecolio empowers schools to create and manage user accounts, including instructors and students, and create classes for them that they participate in.
 
 The MVP offers features such as announcement sharing, homework assignments, and individual notes for students, allowing instructors to keep track of their students' progress.
+<br>
+<br>
+<br>
 
+# <p>The Future Of Ecolio</p>
+<br>
 The Ecolio team plans to add more features in the future, including class attendance management, file sharing, in-app messaging, a school calendar, and administration contact.
 
 Parent accounts will also be included, enabling parents to stay updated on their child's academic progress.
@@ -33,17 +38,17 @@ The idea came up to me when I was randomly searching for different CMSs and foun
 # The Journey
 <br>
 
-Building this platform came with its own stack of challenges, from handling different user types to managing a bunch of states on the React client. Thankfully, with a bit of searching, I managed to overcome all those challenges and deliver this nice app that has great potential.
+Building this platform came with its own stack of challenges, from handling different user types to managing a bunch of states on the React client. Thankfully, with passion, deddciation and a bit of searching, I managed to overcome all those challenges and deliver this nice app that has great potential to grow.
 <br>
 <br>
 <br>
-<p align="center"><img style="width: 90%;" src="https://i.imgur.com/ogZsAM1.png"/>
+<p align="center"><img src="https://i.imgur.com/ogZsAM1.png"/>
 </p>
 <br>
-<p align="center"><img style="width: 90%;" src="https://i.imgur.com/sNWDSXh.png"/>
+<p align="center"><img src="https://i.imgur.com/sNWDSXh.png"/>
 </p>
 <br>
-<p align="center"><img style="width: 90%;" src="https://i.imgur.com/c1cC2fg.png"/>
+<p align="center"><img src="https://i.imgur.com/c1cC2fg.png"/>
 </p>
 
 # <p>Project Structure</p>
