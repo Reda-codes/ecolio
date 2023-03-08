@@ -24,9 +24,6 @@ export function HomePage() {
             <a href="#about">ABOUT</a>
           </li>
           <li className="hover:text-indigo-500">
-            <a href="#video">VIDEO</a>
-          </li>
-          <li className="hover:text-indigo-500">
             <a href="#app">DEMO</a>
           </li>
         </ul>
@@ -237,7 +234,7 @@ export function HomePage() {
               impact on the education industry.
             </p>
             <div className=" userspage rounded-xl mr-8 flex w-full">
-              <div className="w-1/3">
+              <div className="w-1/4">
                 <div className="m-8 mt-0 mx-auto w-auto h-auto">
                   <img
                     className="rounded-full mx-auto"
@@ -258,17 +255,15 @@ export function HomePage() {
                   Reda is my Mom. I am a Self-Taught somehow near software
                   developer who loves to code, learn & write about it. Currently
                   pursuing my dream with the help of ALX Africa and Holberton
-                  School. I also lost about 50kg in the past two years and that
-                  is what motivated me to change my career from working with
-                  hardware to now working on building software.
+                  School.
                 </p>
               </div>
               <div className="w-1/3">
                 <h1 className="text-center m-5 text-5xl font-bold font-mono">
                   Links
                 </h1>
-                <ul>
-                  <li className="m-3">
+                <ul className="flex flex-wrap">
+                  <li className="p-3 w-1/2">
                     <a
                       href="https://www.linkedin.com/in/reda-med/"
                       target="_blank"
@@ -287,7 +282,7 @@ export function HomePage() {
                       </span>
                     </a>
                   </li>
-                  <li className="m-3">
+                  <li className="p-3 w-1/2">
                     <a
                       href="https://twitter.com/RedaCodes"
                       target="_blank"
@@ -306,9 +301,9 @@ export function HomePage() {
                       </span>
                     </a>
                   </li>
-                  <li className="m-3">
+                  <li className="p-3 w-1/2">
                     <a
-                      href="https://reda.codes"
+                      href="https://me.reda.coffee"
                       target="_blank"
                       rel="noreferrer"
                       className="flex justify-left"
@@ -321,13 +316,13 @@ export function HomePage() {
                         height="50"
                       />
                       <span className="align-middle text-3xl ml-5 leading-loose font-bold">
-                        Reda.Codes
+                        Reda.Coffee
                       </span>
                     </a>
                   </li>
-                  <li className="m-3">
+                  <li className="p-3 w-1/2">
                     <a
-                      href="https://github.com/Reda-codes/ecolio"
+                      href="https://github.com/Reda-codes"
                       target="_blank"
                       rel="noreferrer"
                       className="flex justify-left"
@@ -340,11 +335,11 @@ export function HomePage() {
                         height="50"
                       />
                       <span className="align-middle text-3xl ml-5 leading-loose font-bold">
-                        Project Repository
+                        GitHub
                       </span>
                     </a>
                   </li>
-                  <li className="m-3">
+                  <li className="p-3 w-1/2">
                     <a
                       href="mailto:hello@reda.codes"
                       rel="noreferrer"
@@ -358,34 +353,13 @@ export function HomePage() {
                         height="50"
                       />
                       <span className="align-middle text-3xl ml-5 leading-loose font-bold">
-                        Hello@Reda.Codes
+                        Hello@Reda.coffee
                       </span>
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="justify-between bg-white w-3/4 mx-auto p-8 mb-16 rounded-3xl bg-opacity-20">
-        <h1
-          className="text-center mb-5 text-5xl font-bold font-mono"
-          id="video"
-        >
-          Video
-        </h1>
-        <div className="w-full rounded-3xl p-10 drop-shadow-xl">
-          <div className="w-full">
-            <iframe
-              className="w-full rounded-3xl"
-              width="1920"
-              height="700"
-              src="https://www.youtube.com/embed/6NNANhpBND4"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title="Embedded youtube"
-            />
           </div>
         </div>
       </div>
@@ -403,7 +377,7 @@ export function HomePage() {
               <br /> We appreciate your interest in our Demo and hope that you
               found the information on this page helpful. Please note that in
               order to access a demo account, you will need to contact us
-              directly at hello@reda.codes.
+              directly at hello@reda.coffee.
               <br />
               Due to the nature of our app and the way it is used, we require a
               more personalized approach to account creation. We&apos;re happy
