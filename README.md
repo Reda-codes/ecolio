@@ -24,8 +24,7 @@ Ecolio is an essential tool for schools of all sizes and is sure to make a signi
 
 # The Story
 <br>
-
-Building this platform came with it's own stack of challenges, 
+The idea came up to me when I was randomly searching for different CMSs and found out that for schools there isn't that much solutions addressed to this issue so for my [Holberton School](https://www.holbertonschool.com) and [ALX](https://www.alxafrica.com) Portfolio Project I decided to create Ecolio A platform for every school.
 <br>
 <br>
 <br>
@@ -33,10 +32,18 @@ Building this platform came with it's own stack of challenges,
 # The Journey
 <br>
 
-The idea came up to me when I was randomly searching for different CMSs and found out that for schools there isn't that much solutions addressed to this issue so for my [Holberton School](https://www.holbertonschool.com) and [ALX](https://www.alxafrica.com) Portfolio Project I decided to create Ecolio A platform for every school.
+Building this platform came with its own stack of challenges, from handling different user types to managing a bunch of states on the React client. Thankfully, with a bit of searching, I managed to overcome all those challenges and deliver this nice app that has great potential.
 <br>
 <br>
 <br>
+<p align="center"><img style="width: 90%;" src="https://i.imgur.com/ogZsAM1.png"/>
+</p>
+<br>
+<p align="center"><img style="width: 90%;" src="https://i.imgur.com/sNWDSXh.png"/>
+</p>
+<br>
+<p align="center"><img style="width: 90%;" src="https://i.imgur.com/c1cC2fg.png"/>
+</p>
 
 # <p>Project Structure</p>
 
