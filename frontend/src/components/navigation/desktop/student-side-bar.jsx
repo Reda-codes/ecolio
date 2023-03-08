@@ -14,12 +14,6 @@ export function StudentSideBar() {
       <div className="mx-auto pb-4">
         <SideBarTab path="/profile" label="Profile" />
       </div>
-      <div className="mx-auto pb-4">
-        <SideBarTab path="/notes" label="Notes" />
-      </div>
-      <div className="mx-auto pb-4">
-        <SideBarTab path="/classes" label="Classes" />
-      </div>
     </SideBar>
   );
 }

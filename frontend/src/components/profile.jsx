@@ -44,7 +44,11 @@ export function Profile() {
         <div className="flex m-5 bg-slate-600 p-2 text-white rounded-xl">
           <h1 className="text-3xl font-bold">User Type:</h1>
           <h1 className="text-2xl font-bold leading-relaxed pl-5">
-            {user.user_type === "students" ? "Student" : "Instructor"}
+            {user.user_type === "students"
+              ? "Student"
+              : user.user_type === "instructors"
+              ? "Instructor"
+              : "Staff"}
           </h1>
         </div>
         <div className="flex m-5 justify-around mt-20">

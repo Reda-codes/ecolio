@@ -96,7 +96,25 @@ export function UsersForm() {
     if (
       window.confirm("Are you sure you want to permanently delete this user?")
     ) {
-      return console.log(id);
+      const token = "Bearer " + message.replace(/['"]+/g, "");
+      axios
+        .delete("https://api.ecolio.live/api/v1/users/student/" + id, {
+          headers: {
+            Authorization: token,
+            user_type: "students",
+          },
+        })
+        .then((response) => {
+          if (response) {
+            console.log(response.data);
+            setRender(new Date());
+          }
+          // handle success
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          // handle error
+        });
     }
   };
 
@@ -131,7 +149,7 @@ export function UsersForm() {
       .then((response) => {
         if (response.data.user_id) {
           alert(`The user ${response.data.nickname} was created succesfuly`);
-          setRender("Random");
+          setRender(new Date());
         } else {
           alert(response.data.message);
         }

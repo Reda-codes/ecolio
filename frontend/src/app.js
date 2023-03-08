@@ -7,7 +7,6 @@ import { CallbackPage } from "./pages/callback-page";
 import { HomePage } from "./pages/home-page";
 import { NotFoundPage } from "./pages/not-found-page";
 import { ProfilePage } from "./pages/profile-page";
-import { ConnectPage } from "./pages/connect-page";
 import { DashboardPage } from "./pages/dashboard-page";
 import { UsersPage } from "./pages/users-page";
 import { StudentDashboardPage } from "./pages/student-dashboard-page";
@@ -75,14 +74,6 @@ export const App = () => {
         <Route
           path="/dashboard"
           element={<AuthenticationGuard component={StudentDashboardPage} />}
-        />
-        <Route
-          path="/classes"
-          element={<AuthenticationGuard component={ConnectPage} />}
-        />
-        <Route
-          path="/notes"
-          element={<AuthenticationGuard component={ConnectPage} />}
         />
         <Route path="/callback" element={<CallbackPage />} />
         <Route path="*" element={<NotFoundPage />} />

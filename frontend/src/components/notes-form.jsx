@@ -6,7 +6,9 @@ export function NotesForm() {
   const { user, getAccessTokenSilently } = useAuth0();
   const [message, setMessage] = useState(null);
   const [users, setUsers] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [noteInfo, setNoteInfo] = useState({
+    instructor_id: `${user.sub}`,
     instructor_name: `${user.given_name} ${user.family_name}`,
     student_id: "",
     description: "",
@@ -37,28 +39,15 @@ export function NotesForm() {
     }));
   };
 
-  /* function removeFromClass(arr, id, hw) {
-    const result = arr.map((elem) => {
-      if (elem.id === id) {
-        let index = elem.homework.indexOf(hw);
-        if (index > -1) {
-          elem.homework.splice(index, 1);
-        }
-      }
-      return elem;
-    });
+  function afterNoteAdd(res) {
+    const result = [...notes, res];
     return result;
   }
 
-  function addToHomework(arr, id, newHomework) {
-    const result = arr.map((elem) => {
-      if (elem.id === id) {
-        elem.homework.push(newHomework);
-      }
-      return elem;
-    });
+  function afterNoteDelete(id) {
+    const result = notes.filter((item) => item.id !== id);
     return result;
-  } */
+  }
 
   function addNote(e) {
     e.preventDefault();
@@ -68,8 +57,9 @@ export function NotesForm() {
       const token = "Bearer " + message.replace(/['"]+/g, "");
       axios
         .post(
-          " http://127.0.0.1:8000/api/v1/notes",
+          " https://api.ecolio.live/api/v1/notes",
           {
+            instructor_id: noteInfo.instructor_id,
             instructor_name: noteInfo.instructor_name,
             student_id: noteInfo.student_id,
             description: noteInfo.description,
@@ -84,7 +74,8 @@ export function NotesForm() {
         .then((response) => {
           if (response) {
             console.log(response.data);
-            /* setClasses(addToHomework(classes, class_id, classInfo.homework)); */
+            setNotes(afterNoteAdd(response.data));
+            console.log(notes);
           }
           // handle success
         })
@@ -95,25 +86,21 @@ export function NotesForm() {
     }
   }
 
-  /* function removeNote(id) {
+  function removeNote(id) {
     if (
-      window.confirm("Are you sure you want to permanently delete this user?")
+      window.confirm("Are you sure you want to permanently delete this Note?")
     ) {
       const token = "Bearer " + message.replace(/['"]+/g, "");
       axios
-        .put(
-          "https://api.ecolio.live/api/v1/notes" + id,
-          { request: "Delete" },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        )
+        .delete("https://api.ecolio.live/api/v1/notes/" + id, {
+          headers: {
+            Authorization: token,
+          },
+        })
         .then((response) => {
           if (response) {
             console.log(response.data);
-            setClasses(removeFromClass(classes, class_id, classInfo.homework));
+            setNotes(afterNoteDelete(id));
           }
           // handle success
         })
@@ -122,7 +109,7 @@ export function NotesForm() {
           // handle error
         });
     }
-  } */
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -157,9 +144,9 @@ export function NotesForm() {
           alert("There is a problem");
         }
 
-        /* try {
+        try {
           const response = await axios.get(
-            "https://api.ecolio.live/api/v1/classes/instructor/" + id,
+            "https://api.ecolio.live/api/v1/notes/instructor/" + user.sub,
             {
               headers: {
                 Authorization: token,
@@ -167,11 +154,11 @@ export function NotesForm() {
             }
           );
           const data = await response.data;
-          setClasses(data);
+          setNotes(data);
         } catch (error) {
           console.log(error.response.data);
-          alert("There is a problem fetching instructors");
-        } */
+          alert("There is a problem fetching Notes");
+        }
       }
     };
 
@@ -226,13 +213,24 @@ export function NotesForm() {
               type="submit"
               className="block p-2 mx-auto w-1/2 text-3xl  text-white font-bold bg-red-500 rounded-xl"
             >
-              Add Homework
+              Share Note
             </button>
           </form>
+          <div className="bg-white p-5 w-1/2 rounded-2xl">
+            <h1 className="text-2xl font-mono font-bold">Note:</h1>
+            <p className="text-xl font-mono">
+              Dear instructors, We would like to remind to select a user and
+              inputting text before sharing student notes through form. This
+              will ensure that the note is created succesfuly. It is also
+              helpful to include specific information about the note, to provide
+              context for both you and the student. Thank you for your
+              attention.
+            </p>
+          </div>
         </div>
       </div>
-      {/* <div className="relative w-full overflow-visible z-10 shadow-x">
-        <h1 className="text-2xl font-bold p-5 pl-0 ">Classes List</h1>
+      <div className="relative w-full overflow-visible z-10 shadow-x">
+        <h1 className="text-2xl font-bold p-5 pl-0 ">Notes List</h1>
         <table className="w-full text-sm text-left text-black ">
           <thead className="text-xl text-gray-50 uppercase bg-gray-700 ">
             <tr>
@@ -240,77 +238,43 @@ export function NotesForm() {
                 ID
               </th>
               <th scope="col" className="px-6 py-3">
-                Name
+                Student
               </th>
               <th scope="col" className="px-6 py-3">
-                Instructor
+                Description
               </th>
               <th scope="col" className="px-6 py-3">
-                Students
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Homework
+                Action
               </th>
             </tr>
           </thead>
           <tbody>
-            {classes.map((classs) => (
-              <tr key={classs.id} className="userspage border-b text-lg">
+            {notes.map((n) => (
+              <tr key={n.id} className="userspage border-b text-lg">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 >
-                  {classs.id}
+                  {n.id}
                 </th>
-                <td className="px-6 py-4 text-lg">{classs.name}</td>
-                <td className="px-6 py-4 text-lg">{user.sub}</td>
                 <td className="px-6 py-4 text-lg">
-                  <div className="dropdown">
-                    <label>
-                      Students List
-                      <ul className="dropdown-content ">
-                        {getNamesById(classs.students, users).map((user) => (
-                          <li
-                            key={`new-${user.name}`}
-                            className="flex justify-between m-2"
-                          >
-                            <label>{user.name}</label>
-                          </li>
-                        ))}
-                      </ul>
-                    </label>
-                  </div>
+                  {getNameById(n.student_id, users)}
                 </td>
+                <td className="px-6 py-4 text-lg">{n.description}</td>
                 <td className="px-6 py-4 text-lg">
-                  <div className="dropdown">
-                    <label>
-                      Homewrok List
-                      <ul className="dropdown-content">
-                        {classs.homework.map((h) => (
-                          <li
-                            key={`new-${h}`}
-                            className="flex justify-between border-black border p-2"
-                          >
-                            <label>{h}</label>
-                            <button
-                              className="font-bold text-xl text-red-500"
-                              onClick={() => {
-                                removeHomrwork(classs.id, h);
-                              }}
-                            >
-                              X
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </label>
-                  </div>
+                  <button
+                    onClick={() => {
+                      removeNote(n.id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div> */}
+      </div>
     </>
   );
 }

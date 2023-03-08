@@ -17,6 +17,7 @@ export function ClassesForm() {
   const [instructors, setInstructors] = useState([]);
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [render, setRender] = useState("");
 
   const handleClassSelection = (id) => {
     const classId = id;
@@ -71,6 +72,7 @@ export function ClassesForm() {
       .then((response) => {
         if (response) {
           console.log(response.data);
+          setRender(new Date());
         }
         // handle success
       })
@@ -94,6 +96,7 @@ export function ClassesForm() {
         .then((response) => {
           if (response) {
             console.log(response.data);
+            setRender(new Date());
           }
           // handle success
         })
@@ -147,6 +150,7 @@ export function ClassesForm() {
         .then((response) => {
           if (response) {
             console.log(response.data);
+            setRender(new Date());
           }
           // handle success
         })
@@ -176,6 +180,7 @@ export function ClassesForm() {
         .then((response) => {
           if (response) {
             console.log(response.data);
+            setRender(new Date());
           }
           // handle success
         })
@@ -259,7 +264,7 @@ export function ClassesForm() {
     return () => {
       isMounted = false;
     };
-  }, [getAccessTokenSilently, message]);
+  }, [getAccessTokenSilently, message, render]);
   return (
     <>
       <div className="mb-8 overflow-visible z-20">

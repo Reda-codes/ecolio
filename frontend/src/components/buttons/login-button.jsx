@@ -17,7 +17,7 @@ export const LoginButton = () => {
 
   return (
     <button
-      className="w-1/6  bg-blue-500 hover:bg-green-700 text-white font-bold p-4 rounded-3xl text-4xl mx-auto"
+      className="w-full  bg-blue-500 hover:bg-green-700 text-white font-bold p-4 rounded-3xl text-4xl mx-auto"
       onClick={handleLogin}
     >
       Log In

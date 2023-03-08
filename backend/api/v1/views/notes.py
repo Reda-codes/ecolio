@@ -18,17 +18,9 @@ from api.security.guards import (
 def getNotes():
     Database.initialize()
     notes = Database.findAll("notes")
-    notes = [{"id": str(note["id"]), "description": str(note["description"]), "instructor": note["instructor_name"]}
+    notes = [{"id": str(note["id"]), "description": str(note["description"]), "instructor": note["instructor_name"], "instructor_id": note["instructor_id"], "student_id": note["student_id"]}
              for note in notes]
     return jsonify({"notes": notes})
-
-
-@bp.route("/notes/<note_id>", methods=['GET'], strict_slashes=False)
-@authorization_guard
-def getNote(note_id):
-    Database.initialize()
-    note = Database.find("notes", {"id": note_id})
-    return dumps(list(note))
 
 
 @bp.route("/notes/student/<student_id>", methods=['GET'], strict_slashes=False)
@@ -52,6 +44,7 @@ def getInstructorNotes(instructor_id):
 def postNote():
     obj = {
         'id': str(uuid.uuid4()),
+        'instructor_id': request.form.get("instructor_id"),
         'instructor_name': request.form.get("instructor_name"),
         'student_id': request.form.get("student_id"),
         'description': request.form.get("description")
@@ -59,16 +52,6 @@ def postNote():
     Database.initialize()
     note = Database.insert("notes", obj)
     return dumps(obj)
-
-
-@bp.route("/notes/<note_id>", methods=['PUT'], strict_slashes=False)
-@authorization_guard
-def putNote(note_id):
-    request_json = request.get_json()
-    Database.initialize()
-    dbResponse = Database.update(
-        "notes", note_id, {"$set": request_json})
-    return jsonify({"Status": "note Updated"})
 
 
 @bp.route("/notes/<note_id>", methods=['DELETE'], strict_slashes=False)

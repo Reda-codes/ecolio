@@ -228,6 +228,17 @@ export function InClassesForm() {
               Add Homework
             </button>
           </div>
+          <div className="bg-white p-5 w-1/2 rounded-2xl">
+            <h1 className="text-2xl font-mono font-bold">Note:</h1>
+            <p className="text-xl font-mono">
+              Dear instructors, We would like to remind to select a Class and
+              inputting text before adding the new through form. This will
+              ensure that the homework is created succesfuly. It is also helpful
+              to include specific information about the homework, to provide
+              context for both you and the student. Thank you for your
+              attention.
+            </p>
+          </div>
         </div>
       </div>
       <div className="relative w-full overflow-visible z-10 shadow-x">
