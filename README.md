@@ -9,8 +9,6 @@ Ecolio is an innovative school CMS MVP designed to help schools manage their stu
 
 Developed with a great passion, Ecolio empowers schools to create and manage user accounts, including instructors and students, and create classes for them that they participate in.
 
-The idea came up to me when I was randomly searching for different CMSs and found out that for schools there isn't that much solutions addressed to this issue so for my [Holberton School](https://www.holbertonschool.com) and [ALX](https://www.alxafrica.com) Portfolio Project I decided to create Ecolio A platform for every school.
-
 The MVP offers features such as announcement sharing, homework assignments, and individual notes for students, allowing instructors to keep track of their students' progress.
 
 The Ecolio team plans to add more features in the future, including class attendance management, file sharing, in-app messaging, a school calendar, and administration contact.
@@ -20,6 +18,22 @@ Parent accounts will also be included, enabling parents to stay updated on their
 With Ecolio, schools can streamline their administrative tasks and focus on providing the best possible education for their students.
 
 Ecolio is an essential tool for schools of all sizes and is sure to make a significant impact on the education industry.
+<br>
+<br>
+<br>
+
+# The Story
+<br>
+
+Building this platform came with it's own stack of challenges, 
+<br>
+<br>
+<br>
+
+# The Journey
+<br>
+
+The idea came up to me when I was randomly searching for different CMSs and found out that for schools there isn't that much solutions addressed to this issue so for my [Holberton School](https://www.holbertonschool.com) and [ALX](https://www.alxafrica.com) Portfolio Project I decided to create Ecolio A platform for every school.
 <br>
 <br>
 <br>
@@ -63,7 +77,13 @@ The project deployment consist of two automated Jobs. Once a repository is updat
 <br>
 <br>
 
-# <p>Deploy your own Ecolio</p>
+# <p>Deploy & install your own Ecolio</p>
 ### To deploy you own ecolio Follow the guide provided in each service Folder:
 - [Deploy The BackEnd API](https://github.com/Reda-codes/ecolio/blob/main/backend/README.md)
 - [Deploy The FrontEnd client](https://github.com/Reda-codes/ecolio/blob/main/frontend/README.md)
+
+# <p>Check out our Deployed MVP</p>
+[app.ecolio.live](https://app.ecolio.com)
+
+### Contributors
+- [Mohamed Reda B.](https://www.linkedin.com/in/reda-med/)
